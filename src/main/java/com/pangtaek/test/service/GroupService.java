@@ -1,7 +1,8 @@
 package com.pangtaek.test.service;
 
+import com.pangtaek.test.dto.GroupCommentDTO;
 import com.pangtaek.test.dto.GroupInfoDTO;
-import com.pangtaek.test.entity.GroupInfo;
+import com.pangtaek.test.mapper.GroupCommentMapper;
 import com.pangtaek.test.mapper.GroupInfoMapper;
 import com.pangtaek.test.repository.GroupInfoRepository;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,5 +33,11 @@ public class GroupService {
 
     public void registerGroupMember(Integer groupId, Integer memberId) {
 
+    }
+
+    public List<GroupCommentDTO> findGroupCommentsByGroupId(Integer groupId) {
+        List<GroupCommentDTO> commentList = session.getMapper(GroupCommentMapper.class).findGroupCommentsByGroupId(groupId);
+
+        return commentList;
     }
 }

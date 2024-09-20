@@ -1,5 +1,6 @@
 package com.pangtaek.test.config;
 
+import com.pangtaek.test.mapper.GroupCommentMapper;
 import com.pangtaek.test.mapper.GroupInfoMapper;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -40,6 +41,7 @@ public class MybatisConfiguration {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);    // 카멜케이스 변환
         configuration.addMapper(GroupInfoMapper.class);     // 맵퍼 등록
+        configuration.addMapper(GroupCommentMapper.class);
 
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(hikariDataSource());    // DB 설정 등록

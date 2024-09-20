@@ -17,6 +17,8 @@
 <div>
     <button onclick="location.href='/group/list'">목록으로 돌아가기</button>
     <button th:onclick="'location.href=\'/group/join/' + ${foundGroup.getGroupId()} + '\''">참가하기</button>
+    <button onclick="location.href='/group/modify'">수정하기</button>
+
 </div>
 
 <hr>
@@ -32,10 +34,11 @@
 
     <h3>댓글 목록</h3>
     <ul>
-        <li th:each="comment : ${comments}">
-            <span th:text="${comment.text}"></span> <!-- 댓글 텍스트 -->
+        <li th:each="comment : ${commentList}">
+            <span th:text="${comment.getCommentContent()}"></span> <!-- 댓글 텍스트 -->
             <br>
-            <small th:text="${#dates.format(comment.createdDate, 'yyyy-MM-dd HH:mm')}"></small> <!-- 생성 시간 -->
+            <small th:text="${comment.getMemberId()}"></small> <!-- 생성 시간 -->
+            <small th:text="${#dates.format(comment.getCreateDate(), 'yyyy-MM-dd HH:mm')}"></small> <!-- 생성 시간 -->
         </li>
     </ul>
 </div>

@@ -1,5 +1,6 @@
 package com.pangtaek.test.controller;
 
+import com.pangtaek.test.dto.GroupCommentDTO;
 import com.pangtaek.test.dto.GroupInfoDTO;
 import com.pangtaek.test.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,9 @@ public class GroupController {
     @GetMapping("/detail/{groupId}")
     public String groupDetail(@PathVariable Integer groupId, Model model) {
         GroupInfoDTO foundGroup = service.findGroupByGroupId(groupId);
+        List<GroupCommentDTO> commentList = service.findGroupCommentsByGroupId(groupId);
         model.addAttribute("foundGroup", foundGroup);
+        model.addAttribute("commentList", commentList);
         return "group/detail";
     }
 
@@ -49,5 +52,22 @@ public class GroupController {
         // 현재 로그인된 계정을 정보를 가져와야 되는데 얘기해 봐야 될 거 같음.
     }
 
+    @GetMapping("/modify")
+    public void modifyGroupInfoPage() {
+    }
+
+
+//    @PostMapping("/modify")
+//    public String modifyGroupInfo(
+//            @RequestParam Integer memberCounting,
+//            @RequestParam String groupPost,
+//            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime createDate,
+//            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime
+//    ) {
+//        // 모임 정보를 수정하는 로직을 추가
+//        GroupInfoDTO newGroupInfo = new GroupInfoDTO(memberCounting, groupPost);
+////        service.modifyGroupInfo(newGroupInfo)
+//        return "redirect:/group/detail/" + groupId; // 수정 후 상세 페이지로 리다이렉트
+//    }
 
 }
